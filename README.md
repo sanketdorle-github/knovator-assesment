@@ -61,3 +61,24 @@ For designing the overall approach, the following assumptions were made:
 
 6. **Data Size Constraints**  
    - The maximum size of cleaned data per API response has been tested to be approximately **1 KB per job record**.
+
+   ## 🏗️ Project Architecture And Implementation
+
+The architecture of the system is designed to ensure scalability, modularity, and reliability across all components — **Workers**, **Backend**, and **Frontend**.  
+
+Below is a high-level architecture diagram representing the overall data flow and component interaction:
+
+![Project Architecture](./assets/worker_diagram2.jpeg)
+
+### 🔹 Overview
+
+1. **Fetcher Worker** → Fetches and parses data from multiple APIs and pushes it to a Redis queue.  
+2. **Inserter Worker** → Pulls cleaned data from the queue and inserts it into MongoDB.  
+3. **Backend (Express.js)** → Provides REST APIs for the frontend to retrieve and manage data.  
+4. **Frontend (Next.js)** → Consumes backend APIs to display and interact with job listings in the UI.  
+5. **MongoDB** → Stores structured job data.  
+6. **Redis + BullMQ** → Handles asynchronous job queuing and reliable background processing.
+
+---
+
+
