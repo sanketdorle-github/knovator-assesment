@@ -81,6 +81,68 @@ Below is a high-level architecture diagram representing the overall data flow an
 
 ---
 
+## ⚙️ Setup Instructions
+
+Follow the steps below to set up and run the project locally.
+
+---
+
+### 🧩 Prerequisites
+
+- Ensure **Node.js (v18 or above)** is installed on your system.  
+- Make sure you have access to **Redis** and **MongoDB** connection URLs.  
+- Clone this repository to your local machine.
+
+---
+
+### ⚙️ Running the Workers
+
+The project includes two workers — **Fetcher Worker** and **Inserter Worker** — built using **BullMQ** and **Redis** for job management.
+
+
+1. Create a `.env` file containing your Redis and MongoDB credentials.  
+2. Install dependencies.  
+3. Start the workers:
+
+   - Run the fetch jobs worker: `node ./server/workers/fetchWorker.js`  
+     (Fetches job data from APIs, parses XML, and pushes to the Redis queue.)  
+
+   - Run the insert jobs worker: `node ./server/workers/insertWorker.js`  
+     (Pulls jobs from the Redis queue and inserts them into MongoDB.)
+
+Ensure that the backend server and Redis are running before starting the workers.
+
+---
+
+### 🖥️ Backend Setup (Server)
+
+
+1. Create a `.env` file and add the following environment variables:  
+   `REDIS_URL=redis://default:*****@redis-15205.c305.ap-south-1-1.ec2.redns.redis-cloud.com:15205`  
+   `MONGO_URI=mongodb+srv://***:***@cluster0.zbe6d7t.mongodb.net/jobstest`  
+2. Install all dependencies.  
+3. Start the backend server using `npm run dev`.  
+   The backend will be available at **http://localhost:5000**.
+
+---
+
+### 💻 Frontend Setup (Client)
+
+1. Navigate to the `client` folder.  
+2. Create a `.env` file and add your backend API path:  
+   `NEXT_PUBLIC_API_URL=http://localhost:5000/api`  
+3. Install all dependencies.  
+4. Start the frontend using `npm run dev`.  
+   The frontend will be available at **http://localhost:3000**.
+
+---
+
+### 🚀 Notes
+
+- Run both **frontend** and **backend** servers simultaneously for full functionality.  
+- Ensure **Redis** and **MongoDB** connections are active before running the workers.  
+- Workers can be executed in parallel using separate terminals.
+
 
 ## ⚖️ Advantages and Limitations
 
