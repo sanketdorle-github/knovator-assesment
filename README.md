@@ -82,3 +82,38 @@ Below is a high-level architecture diagram representing the overall data flow an
 ---
 
 
+## ⚖️ Advantages and Limitations
+
+### ✅ Advantages
+
+1. **Modular Design**  
+   - Each component (Workers, Backend, Frontend) is independent and can be developed, tested, or scaled separately.
+
+2. **Scalable and Resilient Architecture**  
+   - The use of **BullMQ** and **Redis** ensures reliable job queuing and background processing, making the system capable of handling large data loads.
+
+3. **Asynchronous Data Processing**  
+   - Workers operate asynchronously, improving performance and reducing API call latency.
+
+4. **Flexible API Integration**  
+   - The system is designed to easily integrate additional APIs in the future with minimal changes.
+
+5. **Persistent and Structured Storage**  
+   - Using **MongoDB** enables efficient handling of unstructured or semi-structured data with high flexibility.
+
+6. **Separation of Concerns**  
+   - Clear boundaries between fetching, processing, and presentation layers lead to better maintainability and debugging.
+
+---
+
+### ⚠️ Limitations
+
+1. **Free Tier Restrictions**  
+   - The current setup relies on **free-tier services** for Redis and MongoDB, which may limit performance, storage, and connection throughput.
+
+2. **Unknown API Throughput**  
+   - The actual data throughput and performance characteristics of the external APIs are **not known**, which can affect system performance during bursts or high-volume API responses.
+
+
+
+
