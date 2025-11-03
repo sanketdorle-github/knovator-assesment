@@ -1,4 +1,4 @@
-const ImportLog = require('../models/ImportLog');
+import ImportLog from "../models/ImportLog.js";
 
 // @desc    Get all import logs with pagination and sorting
 // @route   GET /api/import-logs
@@ -7,8 +7,8 @@ const getAllImportLogs = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
-    const sortBy = req.query.sortBy || 'timestamp';
-    const sortOrder = req.query.sortOrder === 'asc' ? 1 : -1;
+    const sortBy = req.query.sortBy || "timestamp";
+    const sortOrder = req.query.sortOrder === "asc" ? 1 : -1;
 
     const skip = (page - 1) * limit;
 
@@ -26,14 +26,14 @@ const getAllImportLogs = async (req, res) => {
         page,
         limit,
         total,
-        pages: Math.ceil(total / limit)
+        pages: Math.ceil(total / limit),
       },
-      message: 'Import logs fetched successfully'
+      message: "Import logs fetched successfully",
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Server error: ' + error.message
+      message: "Server error: " + error.message,
     });
   }
 };
@@ -48,31 +48,28 @@ const getImportLogById = async (req, res) => {
     if (!log) {
       return res.status(404).json({
         success: false,
-        message: 'Import log not found'
+        message: "Import log not found",
       });
     }
 
     res.status(200).json({
       success: true,
       data: log,
-      message: 'Import log fetched successfully'
+      message: "Import log fetched successfully",
     });
   } catch (error) {
-    if (error.name === 'CastError') {
+    if (error.name === "CastError") {
       return res.status(400).json({
         success: false,
-        message: 'Invalid import log ID'
+        message: "Invalid import log ID",
       });
     }
-    
+
     res.status(500).json({
       success: false,
-      message: 'Server error: ' + error.message
+      message: "Server error: " + error.message,
     });
   }
 };
 
-module.exports = {
-  getAllImportLogs,
-  getImportLogById
-};
+export { getAllImportLogs, getImportLogById };

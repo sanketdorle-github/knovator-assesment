@@ -1,14 +1,14 @@
-const express = require('express');
-const {
+import express from "express";
+import {
   getAllJobs,
   getJobById,
-  searchJobs
-} = require('../controllers/xmlDataController');
+  searchJobs,
+} from "../controllers/xmlDataController.js";
 
 const router = express.Router();
 
-router.get('/', getAllJobs);
-router.get('/search', searchJobs);
-router.get('/:id', getJobById);
+router.get("/", getAllJobs);
+router.get("/search", searchJobs);
+router.get("/:id", getJobById);
 
-module.exports = router;
+export default router;

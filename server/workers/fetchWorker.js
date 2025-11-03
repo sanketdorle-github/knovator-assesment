@@ -4,9 +4,8 @@ import { Worker, Queue } from "bullmq";
 import cron from "node-cron";
 import { CONFIG } from "./config.js";
 import dotenv from "dotenv";
-dotenv.config();
-
-
+dotenv.config({ path: "./.env" });
+// console.log(process.env.MONGO_URI);
 const connection = { url: process.env.REDIS_URL };
 
 // Create separate queues for fetching feeds and processing XML jobs

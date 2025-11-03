@@ -101,7 +101,7 @@ The project includes two workers — **Fetcher Worker** and **Inserter Worker** 
 
 
 1. Create a `.env` file containing your Redis and MongoDB credentials.  
-2. Install dependencies.  
+2. Install dependencies using `npm i`.  
 3. Start the workers:
 
    - Run the fetch jobs worker: `node ./server/workers/fetchWorker.js`  
@@ -119,8 +119,10 @@ Ensure that the backend server and Redis are running before starting the workers
 
 1. Create a `.env` file and add the following environment variables:  
    `REDIS_URL=redis://default:*****@redis-15205.c305.ap-south-1-1.ec2.redns.redis-cloud.com:15205`  
-   `MONGO_URI=mongodb+srv://***:***@cluster0.zbe6d7t.mongodb.net/jobstest`  
-2. Install all dependencies.  
+   `MONGO_URI=mongodb+srv://***:***@cluster0.zbe6d7t.mongodb.net/jobstest` 
+   `NODE_ENV=development` 
+   `PORT=5000` 
+2. Install all dependencies using `npm i`.  
 3. Start the backend server using `npm run dev`.  
    The backend will be available at **http://localhost:5000**.
 
@@ -131,7 +133,7 @@ Ensure that the backend server and Redis are running before starting the workers
 1. Navigate to the `client` folder.  
 2. Create a `.env` file and add your backend API path:  
    `NEXT_PUBLIC_API_URL=http://localhost:5000/api`  
-3. Install all dependencies.  
+3. Install all dependencies using `npm i`.  
 4. Start the frontend using `npm run dev`.  
    The frontend will be available at **http://localhost:3000**.
 

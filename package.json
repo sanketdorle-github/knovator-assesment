@@ -1,13 +1,21 @@
 {
+  "name": "job-fetcher-api",
+  "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "start": "node ./server/api_server.js",
+    "dev": "nodemon ./server/api_server.js"
+  },
   "dependencies": {
     "axios": "^1.13.1",
     "bullmq": "^5.63.0",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "html-entities": "^2.6.0",
     "mongodb": "^6.20.0",
+    "mongoose": "^8.19.2",
     "node-cron": "^4.2.1",
     "nodemon": "^3.1.10",
     "redis": "^5.9.0",

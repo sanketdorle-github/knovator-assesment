@@ -1,4 +1,4 @@
-const XmlData = require('../models/XmlData');
+import XmlData from "../models/XmlData.js";
 
 // @desc    Get all jobs with filtering and pagination
 // @route   GET /api/jobs
@@ -6,12 +6,12 @@ const XmlData = require('../models/XmlData');
 const getAllJobs = async (req, res) => {
   try {
     const { company, location, type, page = 1, limit = 10 } = req.query;
-    
+
     // Build filter object
     const filter = {};
-    if (company) filter.company = new RegExp(company, 'i');
-    if (location) filter.location = new RegExp(location, 'i');
-    if (type) filter.type = new RegExp(type, 'i');
+    if (company) filter.company = new RegExp(company, "i");
+    if (location) filter.location = new RegExp(location, "i");
+    if (type) filter.type = new RegExp(type, "i");
 
     const pageNum = parseInt(page);
     const limitNum = parseInt(limit);
@@ -31,14 +31,14 @@ const getAllJobs = async (req, res) => {
         page: pageNum,
         limit: limitNum,
         total,
-        pages: Math.ceil(total / limitNum)
+        pages: Math.ceil(total / limitNum),
       },
-      message: 'Jobs fetched successfully'
+      message: "Jobs fetched successfully",
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Server error: ' + error.message
+      message: "Server error: " + error.message,
     });
   }
 };
@@ -53,26 +53,26 @@ const getJobById = async (req, res) => {
     if (!job) {
       return res.status(404).json({
         success: false,
-        message: 'Job not found'
+        message: "Job not found",
       });
     }
 
     res.status(200).json({
       success: true,
       data: job,
-      message: 'Job fetched successfully'
+      message: "Job fetched successfully",
     });
   } catch (error) {
-    if (error.name === 'CastError') {
+    if (error.name === "CastError") {
       return res.status(400).json({
         success: false,
-        message: 'Invalid job ID'
+        message: "Invalid job ID",
       });
     }
-    
+
     res.status(500).json({
       success: false,
-      message: 'Server error: ' + error.message
+      message: "Server error: " + error.message,
     });
   }
 };
@@ -83,11 +83,11 @@ const getJobById = async (req, res) => {
 const searchJobs = async (req, res) => {
   try {
     const { q, page = 1, limit = 10 } = req.query;
-    
+
     if (!q) {
       return res.status(400).json({
         success: false,
-        message: 'Search query parameter "q" is required'
+        message: 'Search query parameter "q" is required',
       });
     }
 
@@ -98,11 +98,11 @@ const searchJobs = async (req, res) => {
     // Text search on title and description
     const jobs = await XmlData.find(
       { $text: { $search: q } },
-      { score: { $meta: 'textScore' } }
+      { score: { $meta: "textScore" } }
     )
-    .sort({ score: { $meta: 'textScore' } })
-    .skip(skip)
-    .limit(limitNum);
+      .sort({ score: { $meta: "textScore" } })
+      .skip(skip)
+      .limit(limitNum);
 
     const total = await XmlData.countDocuments({ $text: { $search: q } });
 
@@ -113,20 +113,16 @@ const searchJobs = async (req, res) => {
         page: pageNum,
         limit: limitNum,
         total,
-        pages: Math.ceil(total / limitNum)
+        pages: Math.ceil(total / limitNum),
       },
-      message: 'Search completed successfully'
+      message: "Search completed successfully",
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Server error: ' + error.message
+      message: "Server error: " + error.message,
     });
   }
 };
 
-module.exports = {
-  getAllJobs,
-  getJobById,
-  searchJobs
-};
+export { getAllJobs, getJobById, searchJobs };

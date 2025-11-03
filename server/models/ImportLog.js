@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const importLogSchema = new mongoose.Schema({
   log_id: {
@@ -48,4 +48,4 @@ const importLogSchema = new mongoose.Schema({
 importLogSchema.index({ timestamp: -1 });
 importLogSchema.index({ log_id: 1 });
 
-module.exports = mongoose.model('ImportLog', importLogSchema, 'import_logs');
+export default mongoose.model('ImportLog', importLogSchema, 'import_logs');

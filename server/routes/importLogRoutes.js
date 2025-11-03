@@ -1,12 +1,12 @@
-const express = require('express');
-const {
+import express from "express";
+import {
   getAllImportLogs,
-  getImportLogById
-} = require('../controllers/importLogController');
+  getImportLogById,
+} from "../controllers/importLogController.js";
 
 const router = express.Router();
 
-router.get('/', getAllImportLogs);
-router.get('/:id', getImportLogById);
+router.get("/", getAllImportLogs);
+router.get("/:id", getImportLogById);
 
-module.exports = router;
+export default router;
